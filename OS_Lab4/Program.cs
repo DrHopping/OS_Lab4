@@ -77,7 +77,7 @@ namespace OS_Lab4
             Map = new SortedDictionary<int, List<Vertex>>();
         }
 
-        public void AddNode(Vertex vertex) => Vertices.Add(vertex);
+        public void AddVertex(Vertex vertex) => Vertices.Add(vertex);
 
         public void AddEdge(Edge edge)
         {
@@ -122,11 +122,11 @@ namespace OS_Lab4
                     CalculatePath(edge.End, end, path + start.Weight + edge.End.Weight + edge.Weight, visited);
                 }
 
-                visited = Remove(visited, start.Id);
+                visited = Visited(visited, start.Id);
             }
         }
 
-        private List<Vertex> Remove(List<Vertex> visited, int id)
+        private List<Vertex> Visited(List<Vertex> visited, int id)
         {
             var result = new List<Vertex>();
             foreach (var e in visited)
@@ -139,13 +139,7 @@ namespace OS_Lab4
             return result;
         }
 
-        public List<Vertex> GetTransits(List<Vertex> path, string startName, string endName)
-        {
-            var start = FindByName(startName);
-            var end = FindByName(endName);
-            return Vertices.Except(path).ToList();
-        }
-
+        public List<Vertex> GetTransits(List<Vertex> path) => Vertices.Except(path).ToList();
 
         public void Print()
         {
@@ -184,13 +178,13 @@ namespace OS_Lab4
             Vertex v5 = new Vertex("v5", 6, 2);
             Vertex v6 = new Vertex("v6", 2, 1);
             Vertex v7 = new Vertex("v7", 7, 3);
-            test.AddNode(v2);
-            test.AddNode(v1);
-            test.AddNode(v3);
-            test.AddNode(v4);
-            test.AddNode(v5);
-            test.AddNode(v6);
-            test.AddNode(v7);
+            test.AddVertex(v2);
+            test.AddVertex(v1);
+            test.AddVertex(v3);
+            test.AddVertex(v4);
+            test.AddVertex(v5);
+            test.AddVertex(v6);
+            test.AddVertex(v7);
             test.AddEdge(v1, v2, 2);
             test.AddEdge(v1, v3, 4);
             test.AddEdge(v1, v4, 2);
@@ -211,8 +205,8 @@ namespace OS_Lab4
             Console.WriteLine();
             Console.WriteLine("---------------------------------------------------");
 
-            Console.Write("Transit Nodes: ");
-            foreach (var transit in test.GetTransits(critical, "v1", "v7"))
+            Console.Write("Transit Vertices: ");
+            foreach (var transit in test.GetTransits(critical))
             {
                 Console.Write(transit.Name + ",");
             }

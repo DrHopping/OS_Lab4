@@ -77,16 +77,6 @@ namespace OS_Lab4
             Map = new SortedDictionary<int, List<Vertex>>();
         }
 
-        /*private List<Vertex> GetLevel(Vertex start)
-        {
-            var result = new List<Vertex>();
-            foreach (var edge in Adjustments[start])
-            {
-                result.Add(edge.End);
-            }
-            return result;
-        }*/
-
         public void AddNode(Vertex vertex) => Vertices.Add(vertex);
 
         public void AddEdge(Edge edge)
@@ -156,21 +146,6 @@ namespace OS_Lab4
             return Vertices.Except(path).ToList();
         }
 
-        /*private List<Vertex> GetLevels(List<Vertex> path, Vertex start, Vertex end)
-        {
-            var levels = new List<Vertex>();
-            var visited = new List<Vertex>();
-            var current = start;
-            foreach (var edge in Adjustments[current])
-            {
-                var level = GetLevel(current);
-                foreach (var e in level)
-                    if (!visited.Contains(e) && !path.Contains(e)) levels.Add(e);
-                current = edge.End;
-            }
-
-            return levels;
-        }*/
 
         public void Print()
         {
